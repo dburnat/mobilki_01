@@ -33,6 +33,7 @@ namespace App18
         {
             if (string.IsNullOrEmpty(entryFirstName.Text) || string.IsNullOrEmpty(entryLastName.Text))
             {
+                DisplayAlert("Błąd", "Nie wprowadziłeś imienia lub nazwiska", "Wróć");
                 return;
             }
 

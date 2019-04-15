@@ -39,8 +39,8 @@
     </ListView.ItemTemplate>
     -->
         </ListView>
-        <Entry  Grid.Row="1" Grid.Column="0" x:Name="entryFirstName"/>
-        <Entry Grid.Row="1" Grid.Column="1" x:Name="entryLastName"/>
-        <Button Grid.Row="2" Grid.ColumnSpan="2" Text="Generate New Teacher" Clicked="Button_Clicked" />
+        <Entry  Grid.Row="1" Grid.Column="0" x:Name="entryFirstName" Placeholder="Imię" />
+        <Entry Grid.Row="1" Grid.Column="1" x:Name="entryLastName" Placeholder="Nazwisko"/>
+        <Button Grid.Row="2" Grid.ColumnSpan="2" Text="Create New Teacher" Clicked="Button_Clicked" />
     </Grid>
 </ContentPage>
