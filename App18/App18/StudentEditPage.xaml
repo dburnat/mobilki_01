@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App18.StudentEditPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="10">
+            <Label Margin="20" x:Name="labelTeacherName" />
+
+            <Entry x:Name="entryFirstName" Placeholder="Imię"  />
+            <Entry x:Name="entryLastName" Placeholder="Nazwisko" />
+            <Entry x:Name="entryDegree" Placeholder="Ocena" Keyboard="Numeric" />
+            <DatePicker x:Name="entryDate"/>
+            <Button Margin="30" Text="ZAPISZ" Clicked="Button_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
