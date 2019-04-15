@@ -33,7 +33,7 @@ namespace App18
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            
+            bool isItEdit = false;
             
             var newStudent = new Student()
             {
@@ -46,10 +46,14 @@ namespace App18
 
             if(student != null)
             {
+                isItEdit = true;
                 newStudent.ID = student.ID;
             }
             await App.LocalDB.SaveItem(newStudent);
-            await DisplayAlert("Sukces", "Udało się dodać studenta" , "OK");
+            if(isItEdit)
+                await DisplayAlert("Sukces", "Udało się edytować dane studenta" , "OK");
+            else
+                await DisplayAlert("Sukces", "Udało się dodać studenta", "OK");
             await Navigation.PopAsync();
         }
     }
