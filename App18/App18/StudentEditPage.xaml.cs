@@ -51,17 +51,26 @@ namespace App18
                 isItEdit = true;
                 newStudent.ID = student.ID;
             }
+
+            overlayBusy.IsVisible = true;
+            stackBusy.IsVisible = true;
             await App.LocalDB.SaveItem(newStudent);
             if(isItEdit)
                 await DisplayAlert("Sukces", "Udało się edytować dane studenta" , "OK");
             else
                 await DisplayAlert("Sukces", "Udało się dodać studenta", "OK");
+            overlayBusy.IsVisible = false;
+            stackBusy.IsVisible = false;
             await Navigation.PopAsync();
         }
 
         private async void Button_Clicked_1(object sender, EventArgs e)
         {
+            overlayBusy.IsVisible = true;
+            stackBusy.IsVisible = true;
             await DeleteStudent();
+            overlayBusy.IsVisible = false;
+            stackBusy.IsVisible = false;
         }
 
         private async Task DeleteStudent()

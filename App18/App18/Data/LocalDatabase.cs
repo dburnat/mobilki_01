@@ -36,6 +36,7 @@ namespace App18.Data
 
         public async Task<int> SaveItem<T>(T item) where T : class, ISqliteModel, new()
         {
+            await Task.Delay(5000);
             var result = await db.UpdateAsync(item);
 
             if (result == 0)

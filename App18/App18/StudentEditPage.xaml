@@ -3,15 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App18.StudentEditPage">
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="10">
-            <Label Margin="20" x:Name="labelTeacherName" />
+        <AbsoluteLayout >
+            <StackLayout Spacing="20" Padding="10" AbsoluteLayout.LayoutBounds="0,0, 1,1" AbsoluteLayout.LayoutFlags="All">
+                <Label Margin="20" x:Name="labelTeacherName" />
 
-            <Entry x:Name="entryFirstName" Placeholder="Imię"  />
-            <Entry x:Name="entryLastName" Placeholder="Nazwisko" />
-            <Entry x:Name="entryDegree" Placeholder="Ocena" Keyboard="Numeric" />
-            <DatePicker x:Name="entryDate"/>
-            <Button Margin="30" Text="ZAPISZ" Clicked="Button_Clicked"/>
-            <Button x:Name="btnDelete" Margin="30" Text="USUŃ" Clicked="Button_Clicked_1" IsVisible="False"/>
-        </StackLayout>
+                <Entry x:Name="entryFirstName" Placeholder="Imię"  />
+                <Entry x:Name="entryLastName" Placeholder="Nazwisko" />
+                <Entry x:Name="entryDegree" Placeholder="Ocena" Keyboard="Numeric" />
+                <DatePicker x:Name="entryDate"/>
+                <Button Margin="30" Text="ZAPISZ" Clicked="Button_Clicked"/>
+                <Button x:Name="btnDelete" Margin="30" Text="USUŃ" Clicked="Button_Clicked_1" IsVisible="False"/>
+            </StackLayout>
+            <BoxView x:Name="overlayBusy" IsVisible="False" Color="Gray" Opacity="0.75" AbsoluteLayout.LayoutBounds="0,0, 1,1" AbsoluteLayout.LayoutFlags="All"/>
+
+            <StackLayout x:Name="stackBusy" IsVisible="False"  AbsoluteLayout.LayoutBounds="0.5,0.5, 400,400" AbsoluteLayout.LayoutFlags="PositionProportional">
+                <ActivityIndicator IsRunning="True"/>
+                <Label HorizontalTextAlignment="Center" Text="Action in progress..."/>
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
