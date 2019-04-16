@@ -20,6 +20,7 @@ namespace App18
             this.teacher = teacher;
             this.student = student;
 			InitializeComponent ();
+            //btnDelete.IsVisible = 
             labelTeacherName.Text = teacher.FirstName + " " + teacher.LastName;
 
             if(student != null)
@@ -28,6 +29,7 @@ namespace App18
                 entryLastName.Text = student.LastName;
                 entryDegree.Text = student.Grade.ToString();
                 entryDate.Date = student.Birthday;
+                btnDelete.IsVisible = true;
             }
 		}
 
@@ -55,6 +57,22 @@ namespace App18
             else
                 await DisplayAlert("Sukces", "Udało się dodać studenta", "OK");
             await Navigation.PopAsync();
+        }
+
+        private async void Button_Clicked_1(object sender, EventArgs e)
+        {
+            await DeleteStudent();
+        }
+
+        private async Task DeleteStudent()
+        {
+
+            if (student != null)
+            {
+                await App.LocalDB.DeleteItem(student);
+                await DisplayAlert("Sukces", "Usunięto studenta", "OK");
+                await Navigation.PopAsync();
+            }
         }
     }
 }

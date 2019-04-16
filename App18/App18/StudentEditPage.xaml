@@ -11,6 +11,7 @@
             <Entry x:Name="entryDegree" Placeholder="Ocena" Keyboard="Numeric" />
             <DatePicker x:Name="entryDate"/>
             <Button Margin="30" Text="ZAPISZ" Clicked="Button_Clicked"/>
+            <Button x:Name="btnDelete" Margin="30" Text="USUŃ" Clicked="Button_Clicked_1" IsVisible="False"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

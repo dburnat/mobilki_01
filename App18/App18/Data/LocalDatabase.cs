@@ -48,6 +48,7 @@ namespace App18.Data
 
         public async Task<int> DeleteItem<T>(T item) where T : class, ISqliteModel, new()
         {
+            await Task.Delay(5000);
             return await db.DeleteAsync(item);
         }
     }
