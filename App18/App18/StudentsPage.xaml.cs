@@ -1,5 +1,6 @@
 ﻿using App18.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -14,10 +15,14 @@ namespace App18
     public partial class StudentsPage : ContentPage
     {
         private Teacher teacher;
+        private bool isSelectable;
+        private List<Student> studentsSelected;
 
         public StudentsPage(Teacher teacher)
         {
             this.teacher = teacher;
+            studentsSelected = new List<Student>();
+            isSelectable = true;
             InitializeComponent();
         }
 
@@ -28,13 +33,28 @@ namespace App18
 
             var student = e.Item as Student;
 
-          if(  await DisplayAlert($"{student.FirstName} {student.LastName}", $"Ocena: {student.Grade}, Ur.{student.Birthday.ToLongDateString()}. Czy przejść do edycji?", "Tak" , "Nie"))
+            if (!isSelectable)
             {
-                await Navigation.PushAsync(new StudentEditPage(teacher , student )); //tryb edycji studenta
+                if (await DisplayAlert($"{student.FirstName} {student.LastName}", $"Ocena: {student.Grade}, Ur.{student.Birthday.ToLongDateString()}. Czy przejść do edycji?", "Tak", "Nie"))
+                {
+                    await Navigation.PushAsync(new StudentEditPage(teacher, student)); //tryb edycji studenta
+                                                                                       //Deselect Item
+                    ((ListView)sender).SelectedItem = null;
+                }
+            }
+            else
+            {
+                if (studentsSelected.Contains(student))
+                {
+                    studentsSelected.Remove(student);
+                }
+                else
+                {
+                    studentsSelected.Add(student);
+                }
+                btnSelect.Text = $"Remove students ({studentsSelected.Count()})";
             }
 
-            //Deselect Item
-            ((ListView)sender).SelectedItem = null;
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
@@ -66,6 +86,26 @@ namespace App18
         {
             base.OnAppearing();
             await RefreshData();
+        }
+
+        private async void BtnSelect_Clicked(object sender, EventArgs e)
+        {
+            if (isSelectable)
+            {
+                if (studentsSelected.Any())             //jakikolwiek rekord
+                {
+                    foreach (var item in studentsSelected)
+                    {
+                        await App.LocalDB.DeleteItem(item);
+                    }
+                    studentsSelected.Clear();
+                    await DisplayAlert("Sukces", "Usunięto rekordy", "OK");
+                    await RefreshData();
+                }
+            }
+           
+            isSelectable = !isSelectable;
+            btnSelect.Text = isSelectable ? "Select students" : "Remove students";
         }
     }
 }
